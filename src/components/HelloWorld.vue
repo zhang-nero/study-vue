@@ -22,7 +22,7 @@
     },
     data () {
       return {
-        response:'hello world',
+        response:process.env.BASE_URL,
         socket: null,
         response: null,
       };
