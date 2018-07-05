@@ -22,10 +22,10 @@
     },
     data () {
       return {
-        socket:'',
-        stompClient:'',
-        response:'hello world'
-      }
+        response:'hello world',
+        socket: null,
+        response: null,
+      };
     },
     methods:{
       connect(){
@@ -33,9 +33,9 @@
         this.stompClient = Stomp.over(this.socket)
         this.stompClient.connect(
           {},
-          frame => {
-            this.stompClient.subscribe("/endPoint/getResponse", tick => {
-              this.response = JSON.stringify(tick);
+          (frame) =>{
+            this.stompClient.subscribe("/queue/getResponse", (tick)=>{
+              this.response = tick.body;
             });
           },
           error => {
